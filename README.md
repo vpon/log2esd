@@ -19,7 +19,7 @@ Log2esd is a daemon that writting app's log datas to elasticsearch service;The d
 You can install log2esd by sources;
 
 ```
-$ git clone http://192.168.100.5:7777/adn/log2esd.git
+$ git clone https://github.com/vpon/log2esd.git
 $ cd log2esd
 $ ./build_log2esd.sh
 $ cd bin
