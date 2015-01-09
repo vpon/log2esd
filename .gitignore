@@ -1,0 +1,4 @@
+bin
+build
+src/ext_lib
+.cmake
