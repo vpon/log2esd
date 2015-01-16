@@ -49,6 +49,7 @@ namespace log2esd {
     int Capture::EncodeCmd(char * lines, int size) {
       const string & cur = crawler_.GetCurrentFile();
       if (!cur.length()) {
+        crawler_.SearchLog();
         return 0;
       }
 

@@ -61,7 +61,6 @@ namespace log2esd {
     }
 
     bool Crawler::SearchLog(bool is_first) {
-      LOG_DEBUG("crawler search log files......");
       LoadDirLogFiles();
 
       if (!file_list_.size()) {
