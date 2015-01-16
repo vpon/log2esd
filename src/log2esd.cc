@@ -155,6 +155,9 @@ int ReadLines(Capture & capture, int lines, char * block, int max_size) {
   while (lines) {
     int unused = max_size - used;
     int cmd_size = capture.EncodeCmd(block + used, unused);
+    if (0 >= cmd_size) {
+      break;
+    }
     used += cmd_size;
     unused = max_size - used;
     int size = capture.GetLine(block + used, unused);
