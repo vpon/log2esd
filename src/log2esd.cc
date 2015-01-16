@@ -57,7 +57,7 @@ void Help(char ** argv) {
          "-s <app_logs> directory of app's logs (default: ./log)\n"
          "-n <lines> lines of read once (default: 2)\n"
          "-b <line_size> size of line (default: 2048)\n"
-         "-i <interval> waiting interval (default: 2)\n"
+         "-i <interval> waiting interval (default: 10)\n"
          "-w <daemon log> directory of daemon logs (default: /data/logs/log2esd)\n"
          "-l <level> level of daemon logs (default: INFO)\n"
          "-r <yes/no> remove log file after send all datas (default yes)\n"
