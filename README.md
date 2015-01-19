@@ -38,7 +38,7 @@ Options:
          -s <app_logs> directory of app's logs (default: ./log)
          -n <lines> lines of read once (default: 2)
          -b <line_size> size of line (default: 2048)
-         -i <interval> waiting interval (default: 2)
+         -i <interval> waiting interval (default: 10)
          -w <daemon log> directory of daemon logs (default: /data/logs/log2esd)
          -l <level> level of daemon logs (default: INFO)
          -r <yes/no> remove log file after send all datas (default: yes)
