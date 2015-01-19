@@ -36,6 +36,7 @@ Your app's log files must be named in format "YYYYDDMMHHMM.log", and format of d
 Options:
          -h <192.168.0.1:9200> els service (default: localhost:9200)
          -s <app_logs> directory of app's logs (default: ./log)
+         -x <index_prefix> index prefix (default: empty)
          -n <lines> lines of read once (default: 2)
          -b <line_size> size of line (default: 2048)
          -i <interval> waiting interval (default: 10)
