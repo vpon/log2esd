@@ -42,10 +42,11 @@ struct AppConfig {
   string pid_file_;
   string written_file_;
   string rm_;
+  string index_prefix_;
   int lines_;
   int line_size_;
   int interval_;
-  AppConfig() : host_("localhost:9200"), log_home_("./log"), level_("INFO"), daemon_log_("/data/logs/log2esd/"), pid_file_(""), written_file_(".written_file.txt"), rm_("yes"), lines_(2), line_size_(2048), interval_(10) {}
+  AppConfig() : host_("localhost:9200"), log_home_("./log"), level_("INFO"), daemon_log_("/data/logs/log2esd/"), pid_file_(""), written_file_(".written_file.txt"), rm_("yes"), index_prefix_(""), lines_(2), line_size_(2048), interval_(10) {}
 };
 
 void Help(char ** argv) {
@@ -55,6 +56,7 @@ void Help(char ** argv) {
          "Options:\n"
          "-h <192.168.0.1:9200> els service (default: localhost:9200)\n"
          "-s <app_logs> directory of app's logs (default: ./log)\n"
+         "-x <index_prefix> index prefix (default: empty)\n"
          "-n <lines> lines of read once (default: 2)\n"
          "-b <line_size> size of line (default: 2048)\n"
          "-i <interval> waiting interval (default: 10)\n"
@@ -71,7 +73,7 @@ void Help(char ** argv) {
 
 void GetParam(AppConfig * conf, int argc, char ** argv) {
   char opt;
-  while (-1 != (opt = ::getopt(argc, argv, "h:s:d:n:b:i:w:l:r:H"))) {
+  while (-1 != (opt = ::getopt(argc, argv, "h:s:x:d:n:b:i:w:l:r:H"))) {
     switch (opt) {
     case 'h':
       if (NULL != optarg) {
@@ -82,6 +84,12 @@ void GetParam(AppConfig * conf, int argc, char ** argv) {
     case 's':
       if (NULL != optarg) {
         conf->log_home_ = optarg;
+      }
+      break;
+
+    case 'x':
+      if (NULL != optarg) {
+        conf->index_prefix_ = optarg;
       }
       break;
 
@@ -138,6 +146,7 @@ void GetParam(AppConfig * conf, int argc, char ** argv) {
   printf("###########################################\n");
   printf("host:%s\n", conf->host_.c_str());
   printf("log home:%s\n", conf->log_home_.c_str());
+  printf("index prefix:%s\n", conf->index_prefix_.c_str());
   printf("read lines:%d\n", conf->lines_);
   printf("line size:%d\n", conf->line_size_);
   printf("waiting interval:%d\n", conf->interval_);
@@ -249,7 +258,7 @@ int main(int argc, char ** argv) {
   if (0 == ::strncasecmp("no", conf.rm_.c_str(), 2)) {
     rm = false;
   }
-  Capture capture(conf.log_home_, conf.written_file_, rm);
+  Capture capture(conf.log_home_, conf.index_prefix_, conf.written_file_, rm);
   LOG_DEBUG("log2esd initial capture successed");
 
   capture.FindLogs();
