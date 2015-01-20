@@ -125,7 +125,11 @@ namespace log2esd {
         char type[32] = {0};
         ::snprintf(type, sizeof(type), "%02d", hour);
 
-        index_ = index_prefix_ + "-" + index;
+        if (index_prefix_.length()) {
+          index_ = index_prefix_ + "-" + index;          
+        } else {
+          index_ = index;
+        }
         type_ = type;
 
         return 0;
@@ -133,7 +137,11 @@ namespace log2esd {
 
       LOG_DEBUG("capture parse index:" << file);
 
-      index_ = index_prefix_ + "-" + file.substr(0, 8);
+      if (index_prefix_.length()) {
+        index_ = index_prefix_ + "-" + file.substr(0, 8);
+      } else {
+        index_ = file.substr(0, 8);
+      }
       type_ = file.substr(8, 2);
 
       return 0;
