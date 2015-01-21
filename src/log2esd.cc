@@ -242,7 +242,7 @@ int main(int argc, char ** argv) {
 
   AppConfig conf;
   GetParam(&conf, argc, argv);
-  if (0 == conf.divisor_ || 0 != 24 % conf.divisor_) {
+  if (0 >= conf.divisor_ || 24 < conf.divisor_ || 0 != 24 % conf.divisor_) {
     Help(argv);
     printf("\nindex divisor is invalid\n");
     ::_exit(0);
