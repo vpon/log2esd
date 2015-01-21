@@ -34,7 +34,7 @@ namespace log2esd {
 
     class Capture {
      public:
-       explicit Capture(const string & log_home, const string & index_prefix = "", const string & written_file = ".log2esd_written_file.txt", bool rm = true):fd_(NULL), log_home_(log_home), written_file_(written_file), open_file_(""), index_prefix_(index_prefix), index_(""), type_(""), cursor_(0), rm_(rm), crawler_(log_home, written_file) {}
+       explicit Capture(const string & log_home, const string & index_prefix = "", int divisor = 2, const string & written_file = ".log2esd_written_file.txt", bool rm = true):fd_(NULL), log_home_(log_home), written_file_(written_file), open_file_(""), index_prefix_(index_prefix), index_(""), type_(""), cursor_(0), divisor_(divisor), rm_(rm), crawler_(log_home, written_file) {}
        virtual ~Capture() {
          if (fd_) {
            ::fclose(fd_);
@@ -68,6 +68,7 @@ namespace log2esd {
        string index_;
        string type_;
        int cursor_;
+       int divisor_;
        bool rm_;
        Crawler crawler_;
     };

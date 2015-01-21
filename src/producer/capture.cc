@@ -121,7 +121,7 @@ namespace log2esd {
         int hour = tm_now.tm_hour;
 
         char index[32] = {0};
-        ::snprintf(index, sizeof(index) - 1, "%04d%02d%02d%02d", year, mon, day, hour);
+        ::snprintf(index, sizeof(index) - 1, "%04d%02d%02d%02d", year, mon, day, (hour/divisor_)*divisor_);
         char type[32] = {0};
         ::snprintf(type, sizeof(type), "%02d", hour);
 
@@ -136,13 +136,14 @@ namespace log2esd {
       }
 
       LOG_DEBUG("capture parse index:" << file);
-
-      if (index_prefix_.length()) {
-        index_ = index_prefix_ + "-" + file.substr(0, 10);
-      } else {
-        index_ = file.substr(0, 10);
-      }
       type_ = file.substr(8, 2);
+      char seg[32] = {0};
+      ::snprintf(seg, sizeof(seg) - 1, "%02d", (::atoi(type_.c_str())/divisor_)*divisor_);
+      if (index_prefix_.length()) {
+        index_ = index_prefix_ + "-" + file.substr(0, 8) + seg;
+      } else {
+        index_ = file.substr(0, 8) + seg;
+      }
 
       return 0;
     }
