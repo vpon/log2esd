@@ -58,7 +58,7 @@ void Help(char ** argv) {
          "-h <192.168.0.1:9200> els service (default: localhost:9200)\n"
          "-s <app_logs> directory of app's logs (default: ./log)\n"
          "-x <index_prefix> index prefix (default: empty)\n"
-         "-v <index_divisor> index divisor, must be (2,3,4,6,8,12) (default: 2)\n"
+         "-v <index_divisor> index divisor, must be (2,3,4,6,8,12,24) (default: 2)\n"
          "-n <lines> lines of read once (default: 2)\n"
          "-b <line_size> size of line (default: 2048)\n"
          "-i <interval> waiting interval (default: 10)\n"
